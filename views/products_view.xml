@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="Products_form_view" model="ir.ul.view">
+        <field name="name">product.form.view</field>
+        <field name="model">products</field>
+        <field name="arch" type="xml">
+            <form string="product">
+                <header>
+                    <button name="boton_publicar" string="publicar" type="object" status="draft" class="oe_highlight"/>
+                    <button name="boton_borrador" string="borrador" type="object" status="published"/>
+                    <field name="state" widget="statusbar" options="{'clickable': 1}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group col="1">
+                            <field name="image" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group col="2"/>
+                        <group coll="2" colspan="2">
+                            <field name="product"/>
+                            <field name="description"/>
+                            <field name="ISBN"/>
+                            <field name="author_id"/>
+                            <field name="category_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="products_tree_view" model="ir.ul.view">
+        <field name="name">product.tree.view</field>
+        <field name="model">products</field>
+        <field name="arch" type="xml">
+            <tree string="products" decoration-succes="state == published" decoration-info="state == draft">
+                <field name="product"/>
+                <field name="description"/>
+                <field name="ISBN"/>
+                <field name="author_id"/>
+                <field name="category_id"/>
+                <field name="state" widget="badge" decoration-info="state == draft" decoration-succes="state == published"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="products_kanban_view" model="ir.ul.view">
+        <field name="name">Product Kanban</field>
+        <field name="model">products</field>
+        <field name="arch" type="xml">
+        <kanban>
+            <field name="id"/>
+            <field name="product"/>
+            <field name="description"/>
+            <field name="ISBN"/>
+            <field name="author_id"/>
+            <template>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <div class="o_kanban_image">
+                            <img t--att src="kanban_image('products', 'image', record.id.row_value)" alt="image"/>
+                        </div>
+                        <div class="oe_kanban.details">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_tittle_oe_patner_heading">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </template>
+        </kanban>
+    </record>
+
+    <record id="products_search_view" model="ir.ui.iew">
+        <field name="names">products.search.view</field>
+        <field name="model">products</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="product name"/>
+                <field name="autor_id" string="author name"/>
+
+                <filter name="state" string="state" domain="[('category_id', 'state')]" />
+
+                <group expand="0" string="agrupar por" colspan="12" col="10">
+                    <filter name="category" string="category" context="{'group_by':'category_id'}"/>
+                    <filter name="author" string="author" context="{'group_by':'author_id'}"/>
+                </group>
+
+                <searchpanel>
+                    <field name="category_id" string="Category" icon="fa-users"/>
+                    <field name="author_id" string="Author" icon="fa-users"/>                    
+                </searchpanel>
+            </search>
+        </field>
+    </record
+
+</odoo>

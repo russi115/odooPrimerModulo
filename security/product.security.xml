@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="category_model_product" model="ir.module.category">
+        <field name="name">Products</field>
+    </record>
+    <record id="product_group_user" model="res.group">
+        <field name="name">Users</field>
+        <field name="category_id" ref="category_model_product"></field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user))]"></field>
+    </record>
+</odoo>

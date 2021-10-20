@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="Product-action" model="ir.action.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">Products</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="author-action" model="ir.action.act_window">
+        <field name="name">Author</field>
+        <field name="res_model">author</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="List de products" id="products"/>
+    <menuitem name="Products" id="Products_menu" parent="Products_menu" action="Products_action"/>
+    <menuitem name="author" id="author_menu" parent="Products_menu" action="author_action"/>
+</odoo>
